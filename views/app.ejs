@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            font-family:monospace;
+            font-size: 19px;
+            overflow: hidden;
+        }
+        /* header{
+            height:60px;
+            top:0px;
+            background-color: rgba(0, 0, 0, 0.251);
+            backdrop-filter: blur(20px);
+            position: relative;
+            z-index: 10;
+        } */
+        footer{
+            height:70px;
+            width:99vw;
+            background-color: rgb(8, 143, 143 );
+            z-index: 10;
+            position: absolute;
+            top:90vh;
+            display:flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        button{
+            height:45px;
+            border:none;
+            border-radius: 5px;
+            font-size: 15px;
+            font-family:monospace;
+            color:white;
+            background-color: transparent;
+        }
+        .container{
+            display:flex;
+        }
+        video{
+            margin:10px;
+            border-radius: 5px;
+        }
+        .grid{
+            display:flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            width:100%;
+            overflow:auto;
+            height:98vh;
+            background-color: #160c0b;
+            
+        }
+        .grid::-webkit-scrollbar{
+            display:none;
+        }
+        .chat_box{
+            height: 70%;
+            width:95%;
+            overflow: scroll;
+            padding:10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            font-family: monospace;
+            font-size: 15px;
+            /* background-color: rgb(218, 247, 166 ); */
+            background-color: white;
+            color: #160c0b;
+        }
+        .chat_box::-webkit-scrollbar{
+            display: none;
+        }
+        input[type=text]{
+            width:80%;
+            border-radius: 5px;
+            background-color: rgba(0, 0, 0, 0.112);
+            height: 40px;
+            display:flex;
+            flex-direction: column;
+            border:none;
+            outline:none;
+            padding-left:10px;
+            /* box-shadow: 0px 0px 5px rgb(8, 143, 143); */
+        }
+        .holder{
+            width:30%;
+            display: flex;
+            flex-direction: column;
+            height:98vh;
+            overflow: hidden;
+            display:none;
+            background-color: rgb(8, 143, 143 );
+            color:white;
+        }
+        .chat_holder{
+            display:flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        .chat_cross{
+            width:90%;
+            text-align: center;
+            font-family: monospace;
+        }
+        .close{
+            background-color: transparent;
+            border:none;
+            width:30px;
+            height:30px;
+        }
+        .close:hover{
+            box-shadow: rgb(218, 247, 166 );
+        }
+        button:hover{
+            background-color: rgb(8, 143, 143);
+            color:white;
+            box-shadow: 0px 0px 5px rgb(218, 247, 166 );
+        }
+        .section_2{
+            width:450px;
+        }
+        .section_1, .section_2, .section_3{
+            display: flex;
+            justify-content: space-evenly;
+            border-radius: 5px;
+            align-items: center;
+            background-color : rgba(255, 255, 255, 0.248);
+            height:55px;
+            /* filter: blur(1px); */
+        }
+        .section_1, .section_3{
+            width:15%;
+        }
+        .section_3{
+            text-align: end;
+        }
+        .text{
+            display:flex;
+            justify-content: space-evenly;
+            width:100%;
+            background-color: white;
+            height:9%;
+            align-items: center;
+        }
+        #send:hover{
+            background-color: rgba(0, 0, 0, 0.158);
+        }
+        #send{
+            border-radius: 50%;
+        }
+        svg path{
+            stroke:rgb(8, 143, 143);
+            fill:transparent;
+            stroke-dasharray: 60px;
+            stroke-dashoffset: 60px;
+            animation:send 2s ease-out infinite;
+        }
+        #profile{
+            width:30px;
+            height:30px;
+            background-color: rgb(8, 143, 143);
+            border-radius: 10%;
+            display:inline-block;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 10px;
+            color: white;
+        }
+        #profile_holder{
+            display:flex;
+            align-items: center;
+        }
+        .flex{
+            display:flex;
+            justify-content: space-between;
+            width:90%;
+            height:auto;
+            margin-bottom: 10px;
+        }
+        #chatter{
+            background-color: #160c0b;
+            color:white;
+            height:auto;
+        }
+        .participants{
+            position:absolute;
+            height:60vh;
+            width:35vw;
+            background-color: white;
+            border-radius: 5px;
+            top:20vh;
+            left:32.5vw;
+            display:none;
+        }
+        .participants .title button{
+            height:30px;
+            width:30px;
+            border-radius: 50%;
+        }
+        .title div{
+            text-align: center;
+            width:90%;
+            font-family: monospace;
+        }
+        .title {
+            display:flex;
+            justify-content: space-evenly;
+            align-items: center;
+            width:100%;
+            height:10%;
+        }
+        .list{
+            width:100%;
+            height:90%;
+            padding:10px;
+        }
+        .closePart:hover{
+            background-color: rgba(0, 0, 0, 0.164);
+        }
+        .to{
+            font-size: 15px;
+            margin-left: 5px;
+        }
+        .showUp{
+            height:20px;
+            width:100px;
+            font-size: 13px;
+            background-color: #160c0b;
+            color:white;
+            margin-left: 5px;
+        }
+        
+        @keyframes send {
+            80%{
+                fill:transparent;
+            }
+            100%{
+                stroke-dashoffset: 0;
+                fill:rgb(8, 143, 143)
+            }
+        }
+    </style>
+    <script  src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.js" integrity="sha512-VJ6+sp2E5rFQk05caiXXzQd1wBABpjEj1r5kMiLmGAAgwPItw1YpqsCCBtq8Yr1x6C49/mTpRdXtq8O2RcZhlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script  src="/socket.io/socket.io.js"></script>
+    </head>
+<body>
+    <header></header>
+    <div class="container">
+        <div class="grid">
+        </div>
+        <div class="holder">
+            <div class ="chat_holder">
+                <button class="showUp">Everyone</button>
+                <div class="chat_cross">Chat...</div>
+                <button class="close" onclick="closeChat()">⚔️</button></div>
+            <div class="chat_box">
+            </div>
+            <div class="text">
+            <input type="text" placeholder="type in your message">
+            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="enable-background:new 0 0 24 24" viewBox="0 0 24 24" id="send" height="30" width="30">
+                <g id="Layer_2">
+                  <g>
+                    <path d="M17.1108,3.084l-1.3086,0.3091C15.5903,3.4312,15.394,3.4844,15.187,3.542l-0.084,0.0234
+                          c-3.6436,0.8853-7.1372,2.229-10.3755,3.9897c-1.2075,0.6431-1.874,1.936-1.6978,3.2935
+                          c0.1772,1.3633,1.1582,2.4482,2.5049,2.7646l3.4214,0.7808c0.145,0.0331,0.2709,0.105,0.3766,0.1985
+                          c0.0119,0.0132,0.0159,0.0304,0.0286,0.0432c0.0128,0.0128,0.0302,0.0169,0.0435,0.0289
+                          c0.0937,0.1057,0.1656,0.2316,0.1987,0.3764l0.7803,3.4209C10.7241,19.9561,12.0381,21,13.5791,21
+                          c1.2119,0,2.2817-0.646,2.8599-1.7241c1.876-3.4663,3.2744-7.1787,4.1543-11.0288l0.3203-1.3604
+                          c0.0005-0.0015,0.001-0.0029,0.0015-0.0044c0.2466-1.0708-0.0703-2.1743-0.8477-2.9521
+                          C19.2896,3.1523,18.1846,2.834,17.1108,3.084z M18.9663,6.4316l-0.3208,1.3633c-0.8418,3.6797-2.1758,7.2222-3.9673,10.5322
+                          C14.3643,18.9126,13.855,19,13.5791,19c-0.5083,0-1.0908-0.3037-1.2451-0.9824l-0.7808-3.4219
+                          c-0.0435-0.1906-0.1259-0.3613-0.2036-0.5341l2.3564-2.356c0.3906-0.3901,0.3906-1.0234,0-1.4141s-1.0234-0.3906-1.4141,0
+                          l-2.3568,2.3564c-0.1744-0.0785-0.3471-0.1611-0.5397-0.205L5.9868,11.665c-0.7983-0.1875-0.9468-0.8696-0.9736-1.0742
+                          c-0.0259-0.2021-0.0566-0.8916,0.6621-1.2744c3.0938-1.6821,6.4248-2.9629,9.9272-3.8145l0.1187-0.0327
+                          c0.1465-0.0405,0.2852-0.0806,0.4873-0.1187l1.356-0.3188C17.6558,5.0107,17.7466,5,17.8359,5
+                          c0.3042,0,0.5923,0.1196,0.8169,0.3442C18.9438,5.6353,19.0581,6.0317,18.9663,6.4316z"></path>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="to">To: <span>Everyone</span></div>
+        </div>
+    </div>
+    <footer>
+        <div class="section_1">
+                <button class="mute">mute</button>
+                <button class="video">start video</button>
+        </div>
+        <div class="section_2">
+            <button class="btnPart" onclick="openPart()">participants</button>
+            <button class="chat" onclick="openChat()">Chat</button>
+            <button>reactions</button>
+            <button>security</button>
+            <button>more</button>
+        </div>
+        <div class="section_3">
+            <button class="endSession">End</button>
+        </div>
+    </footer>
+    <div class="participants">
+        <div class="title">
+            <div>Participants</div>
+            <button onclick="closePart()" class="closePart">⚔️</button>
+        </div>
+        <div class="list">
+
+        </div>
+    </div>
+    <script>
+        peers={};
+        const socket= io();
+        const ROOM_ID = "<%= roomId %>"
+        var c=0;
+        var peer= new Peer(undefined, {
+            host:'/',
+            port:"3001"
+ 
+        });
+        footer = document.querySelector("footer");
+        document.addEventListener('mousemove', ()=>{
+            footer.style.top="90vh"
+            footer.style.display="flex";
+            document.addEventListener("click", ()=>{
+            footer.style.top="100vh"
+                footer.style.display="none";
+        })
+        })
+
+        const holder= document.querySelector(".holder");
+        const participants = document.querySelector(".participants");
+        const list = document.querySelector(".list");
+        to= document.querySelector("span");
+        showUp= document.querySelector(".showUp");
+        to.innerText="Everyone";
+        openChat=()=>{
+            holder.style.display="flex"
+        }
+        closeChat=()=>{
+            holder.style.display="none";
+        }
+        openPart=()=>{
+            participants.style.display="inline-block";
+            username="Everyone";
+            chatter = document.querySelectorAll('#chatter').forEach((btn)=>{
+            btn.addEventListener("click", (el)=>{
+            to.innerText= btn.previousElementSibling.innerText.substring(2);
+            holder.style.display="flex";
+            showUp.innerText="Private";
+            })
+        })
+        // console.log(document.querySelectorAll('#chatter'));
+        }
+        closePart=()=>{
+            participants.style.display="none";
+        }
+        showUp.addEventListener('click', ()=>{
+            if(to.innerText!="Everyone"){
+                showUp.style.backgroundColor="#160c0b";
+                showUp.style.color="white";
+                to.innerText="Everyone";
+                showUp.innerText="Everyone"
+            }
+        })
+        endSession= document.querySelector(".endSession");
+        endSession.addEventListener('click', ()=>{
+            window.location="/";
+        })
+        console.log(document.querySelectorAll('#chatter'));
+        chat_box=document.querySelector(".chat_box");
+        send=document.querySelector("#send");
+        send.addEventListener('click', (ele)=>{
+            message= document.querySelector("input").value;  
+            if(to.innerText=="Everyone"){
+            if(message!=""){
+            socket.emit("message", message, peer.id); // socket.send(message); also works
+            };
+            document.querySelector("input").value="";
+        }
+        else{
+            if(message!=""){
+            socket.emit("message_pvt", message, peer.id, to.innerText); // socket.send(message); also works
+            }
+            document.querySelector("input").value="";
+        }
+        })
+         socket.on('send_msg', (data, peerID)=>{
+            chat_box.innerHTML+=`<div class="flex"><div id="profile_holder"> <div id="profile">${peerID.substring(0, 2)}</div> ${data}</div><div>`;
+         })
+         socket.on('private', (data, peer_id)=>{
+            chat_box.innerHTML+=`<div class="flex"><div id="profile_holder"> <div id="profile">${peer_id.substring(0, 2)}</div> ${data}</div></div>`;
+         })
+         socket.on("listOfPart", id=>{
+            list.innerHTML+=`<div class="flex"><div id="profile_holder"> <div id="profile">${id.substring(0, 2)}</div> ${id}</div> <button id="chatter">Chat</button></div>`;
+         })
+        const myVideo= document.createElement("video");
+        let video_grid= document.querySelector(".grid");
+        let Start_stop_video= document.querySelector(".video");
+        Start_stop_video.addEventListener("click", ()=>{
+            navigator.mediaDevices.getUserMedia({
+            video:false,
+            audio:true
+        }).then(stream=>{
+            stream.getTracks().forEach(track => track.stop());
+            video_grid.srcObject = null;
+        })
+        })
+
+        navigator.mediaDevices.getUserMedia({
+            video:true,
+            audio:true
+        }).then(stream=>{
+            appendVideo(myVideo, stream);
+            peer.on('call', call=>{
+                call.answer(stream);
+                const videoelement = document.createElement("video");
+                call.on('stream', streamVideo=>{
+                    appendVideo(videoelement, streamVideo);
+                })
+            })
+
+            socket.on('user-connected', userId=>{
+                console.log(`user connected ${userId}`);
+                setTimeout(()=>{
+                const call= peer.call(userId, stream);
+                peers[userId]=call;
+                // console.log(peers);
+                const videoELEMENT= document.createElement("video");
+                call.on("stream", streamVideo=>{
+                    appendVideo(videoELEMENT, streamVideo);
+                })
+                call.on('close', ()=>{
+                    videoELEMENT.remove();
+                })
+                }, 1000);
+            })
+        }) 
+
+        socket.on('user-disconnected', id=>{
+            console.log(id);
+            if(peers[id]){
+                peers[id].close();
+            }
+            socket.emit("delete", id);
+        })
+        socket.on("delete_part", peerId=>{
+            console.log("deleting id");
+            document.querySelectorAll(".flex").forEach((div)=>{
+                console.log(div.innerText);
+                if(div.innerText==peerId){
+                    div.remove();
+                }
+            })
+        })
+        peer.on("open", id=>{
+            socket.emit("join-room", ROOM_ID, id);
+            socket.emit("participants", id);
+        })
+        function appendVideo(video, streamVideo){
+            video.srcObject=streamVideo;
+            video.addEventListener('loadedmetadata', ()=>{
+                video.play();
+            })
+            video_grid.append(video);
+            c=0;
+            document.querySelectorAll("video").forEach((element)=>{
+                c++;
+                if(c==2){
+                    document.querySelectorAll("video").forEach(ele=>{
+                    ele.style.width=`${eval(video_grid.clientWidth / 2 -100)}px`;
+                })
+                }
+            else if(c>2){
+                document.querySelectorAll("video").forEach(ele=>{
+            ele.style.width=`${eval(video_grid.clientWidth / 3 -100)}px`;
+            ele.style.height=`${eval(video_grid.clientHeight / 2 )}px`;
+                })
+            }
+            })
+        }
+    </script>
+</body>
+</html>
