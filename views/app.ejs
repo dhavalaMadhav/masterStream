@@ -399,9 +399,10 @@
         const ROOM_ID = "<%= roomId %>"
         var c=0;
         var peer= new Peer(undefined, {
-            host:'https://masterstream.onrender.com',
-            port:"3001"
- 
+            host:'masterstream.onrender.com',
+            port:"3001",
+            path: '/',
+            secure: true
         });
         footer = document.querySelector("footer");
         document.addEventListener('mousemove', ()=>{
