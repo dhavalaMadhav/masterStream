@@ -11,6 +11,13 @@ app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 const { v4 :uuidv4}= require("uuid");
+const { ExpressPeerServer } = require('peer');
+const peerServer = ExpressPeerServer(http, {
+  debug: true,
+  path: '/'
+});
+
+app.use('/peerjs', peerServer);
 const PORT = process.env.PORT || 3000;
 http.listen(PORT, ()=>{
     console.log(`running on port ${PORT}`);
