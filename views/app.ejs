@@ -10,33 +10,24 @@
             font-size: 19px;
             overflow: hidden;
         }
-        /* header{
-            height:60px;
-            top:0px;
-            background-color: rgba(0, 0, 0, 0.251);
-            backdrop-filter: blur(20px);
-            position: relative;
-            z-index: 10;
-        } */
         footer{
             height:70px;
             width:99vw;
-            background-color: rgb(8, 143, 143 );
+            background-color: #3a4380;
             z-index: 10;
             position: absolute;
-            top:90vh;
+            top:90.3vh;
             display:flex;
             justify-content: space-evenly;
             align-items: center;
         }
         button{
             height:45px;
-            border:none;
             border-radius: 5px;
             font-size: 15px;
             font-family:monospace;
-            color:white;
             background-color: transparent;
+            border: 2px solid rgba(0, 0, 0, 0.155);
         }
         .container{
             display:flex;
@@ -44,16 +35,27 @@
         video{
             margin:10px;
             border-radius: 5px;
+            position:relative;
+            border:10px double #3a4380;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            width:1200px;
         }
         .grid{
             display:flex;
             justify-content: space-evenly;
+            align-items: center;
             flex-wrap: wrap;
             width:100%;
             overflow:auto;
             height:98vh;
-            background-color: #160c0b;
-            
+            background-color: white;
+        }
+        .grid > div{
+            border:2px solid red;
+            /* height:fit-content; */
+            padding:0;
+            object-fit: contain;
         }
         .grid::-webkit-scrollbar{
             display:none;
@@ -77,7 +79,7 @@
         }
         input[type=text]{
             width:80%;
-            border-radius: 5px;
+            border-radius: 50px;
             background-color: rgba(0, 0, 0, 0.112);
             height: 40px;
             display:flex;
@@ -94,8 +96,9 @@
             height:98vh;
             overflow: hidden;
             display:none;
-            background-color: rgb(8, 143, 143 );
+            background-color: #3a4380;
             color:white;
+            min-width: 250px;
         }
         .chat_holder{
             display:flex;
@@ -112,12 +115,21 @@
             border:none;
             width:30px;
             height:30px;
+            color:white;
+            font-size: 20px;
+            border-radius: 50%;
+            font-weight: bolder;
         }
         .close:hover{
-            box-shadow: rgb(218, 247, 166 );
+            background-color: rgba(255, 255, 255, 0.244);
         }
-        button:hover{
-            background-color: rgb(8, 143, 143);
+         .section_2 > button:hover{
+            background-color: #3a4380;
+            color:white;
+            box-shadow: 0px 0px 5px rgb(218, 247, 166 );
+        }
+        .section_3 > button:hover{
+            background-color: #3a4380;
             color:white;
             box-shadow: 0px 0px 5px rgb(218, 247, 166 );
         }
@@ -131,6 +143,8 @@
             align-items: center;
             background-color : rgba(255, 255, 255, 0.248);
             height:55px;
+            
+            border: 2px solid rgba(0, 0, 0, 0.307);
             /* filter: blur(1px); */
         }
         .section_1, .section_3{
@@ -154,16 +168,16 @@
             border-radius: 50%;
         }
         svg path{
-            stroke:rgb(8, 143, 143);
+            stroke:#6874c0;
             fill:transparent;
             stroke-dasharray: 60px;
             stroke-dashoffset: 60px;
             animation:send 2s ease-out infinite;
         }
         #profile{
-            width:30px;
-            height:30px;
-            background-color: rgb(8, 143, 143);
+            min-width:30px;
+            min-height:30px;
+            background-color: #3a4380;
             border-radius: 10%;
             display:inline-block;
             display:flex;
@@ -179,14 +193,16 @@
         .flex{
             display:flex;
             justify-content: space-between;
-            width:90%;
+            align-items:center;
+            width:100%;
             height:auto;
             margin-bottom: 10px;
+            padding-right: 10px;
         }
         #chatter{
             background-color: #160c0b;
             color:white;
-            height:auto;
+            max-height:30px;
         }
         .participants{
             position:absolute;
@@ -197,6 +213,10 @@
             top:20vh;
             left:32.5vw;
             display:none;
+            box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.321);
+            overflow-y: auto;
+            overflow-x: hidden;
+            min-width: 350px;
         }
         .participants .title button{
             height:30px;
@@ -210,18 +230,24 @@
         }
         .title {
             display:flex;
-            justify-content: space-evenly;
+            justify-content: center;
             align-items: center;
             width:100%;
             height:10%;
+            font-weight: bolder;
         }
         .list{
-            width:100%;
-            height:90%;
-            padding:10px;
+            width:97%;
+            height:89%;
+            padding-left:10px;
         }
         .closePart:hover{
-            background-color: rgba(0, 0, 0, 0.164);
+            color:#3a4380;
+        }
+        .closePart{
+            font-size: 20px;
+            border:none;
+            font-weight: bolder;
         }
         .to{
             font-size: 15px;
@@ -235,14 +261,62 @@
             color:white;
             margin-left: 5px;
         }
-        
+        .emojis{
+            width:200px;
+            background-color:#160c0b;
+            border-radius: 5px;
+            position: absolute;
+            z-index: 100;
+            height:50px;
+            display:flex;
+            justify-content: space-evenly;
+            align-items: center;
+            left:calc((100vw - 200px)/2);
+            top:82vh;
+            display: none;
+        }
+        #fit{
+            position: absolute;
+            left:calc((100vw - 50px)/2);
+            width:50px;
+            height:50px;
+            font-size: 40px;
+            border-radius: 5px;
+            top:480px;
+            animation: move 2s ease-in-out 1;
+            animation-fill-mode: forwards;
+            border:none;
+        }
+        .emojis button{
+            background-color: transparent;
+            border:none;
+            width:40px;
+            height:40px;
+            border-radius: 5px;
+            font-size: 25px;
+        }
+        .emojis button:hover{
+            background-color: rgba(255, 255, 255, 0.256);
+        }
+        @keyframes move {
+            0%{
+                opacity: 0;
+            }
+            50%{
+                opacity: 1;
+            }
+            100%{
+                transform: translateY(-150px);
+                opacity: 0;
+            }
+        }
         @keyframes send {
             80%{
                 fill:transparent;
             }
             100%{
                 stroke-dashoffset: 0;
-                fill:rgb(8, 143, 143)
+                fill:#6874c0
             }
         }
     </style>
@@ -259,7 +333,7 @@
             <div class ="chat_holder">
                 <button class="showUp">Everyone</button>
                 <div class="chat_cross">Chat...</div>
-                <button class="close" onclick="closeChat()">⚔️</button></div>
+                <button class="close" onclick="closeChat()">x</button></div>
             <div class="chat_box">
             </div>
             <div class="text">
@@ -296,7 +370,7 @@
         <div class="section_2">
             <button class="btnPart" onclick="openPart()">participants</button>
             <button class="chat" onclick="openChat()">Chat</button>
-            <button>reactions</button>
+            <button class="reactions" onclick="openReactions()">reactions</button>
             <button>security</button>
             <button>more</button>
         </div>
@@ -307,11 +381,17 @@
     <div class="participants">
         <div class="title">
             <div>Participants</div>
-            <button onclick="closePart()" class="closePart">⚔️</button>
+            <button onclick="closePart()" class="closePart">x</button>
         </div>
         <div class="list">
 
         </div>
+    </div>
+    <div class="emojis">
+        <button id="done">👍🏼</button>
+        <button id="heart">❤️</button>
+        <button id="laugh">🤣</button>
+        <button id="ok">🫡</button>
     </div>
     <script>
         peers={};
@@ -325,7 +405,7 @@
         });
         footer = document.querySelector("footer");
         document.addEventListener('mousemove', ()=>{
-            footer.style.top="90vh"
+            footer.style.top="90.3vh"
             footer.style.display="flex";
             document.addEventListener("click", ()=>{
             footer.style.top="100vh"
@@ -338,6 +418,15 @@
         const list = document.querySelector(".list");
         to= document.querySelector("span");
         showUp= document.querySelector(".showUp");
+        reactions=document.querySelector('.reaction');
+        reactions_all = document.querySelector(".emojis");
+        buttons=document.querySelectorAll(".emojis button");
+        Object_of_reaction={
+            heart: "❤️",
+            laugh: "🤣",
+            ok: "🫡",
+            done: "👍🏼"
+        }
         to.innerText="Everyone";
         openChat=()=>{
             holder.style.display="flex"
@@ -348,7 +437,7 @@
         openPart=()=>{
             participants.style.display="inline-block";
             username="Everyone";
-            chatter = document.querySelectorAll('#chatter').forEach((btn)=>{
+            document.querySelectorAll('#chatter').forEach((btn)=>{
             btn.addEventListener("click", (el)=>{
             to.innerText= btn.previousElementSibling.innerText.substring(2);
             holder.style.display="flex";
@@ -360,6 +449,25 @@
         closePart=()=>{
             participants.style.display="none";
         }
+
+        openReactions=()=>{
+            reactions_all.style.display= "flex";
+        }
+
+        buttons.forEach(ele=>{
+            ele.addEventListener('click', ()=>{
+                socket.emit('emoji', ele.id);
+            })
+        })
+        socket.on('add_emoji', eleId=>{
+            fit = document.createElement("div");
+                    document.body.append(fit);
+                    fit.id="fit"
+                    fit.append(Object_of_reaction[eleId]);
+                    reactions_all.style.display= "none";
+        })
+
+
         showUp.addEventListener('click', ()=>{
             if(to.innerText!="Everyone"){
                 showUp.style.backgroundColor="#160c0b";
@@ -396,8 +504,12 @@
          socket.on('private', (data, peer_id)=>{
             chat_box.innerHTML+=`<div class="flex"><div id="profile_holder"> <div id="profile">${peer_id.substring(0, 2)}</div> ${data}</div></div>`;
          })
-         socket.on("listOfPart", id=>{
+         socket.on("listOfPart", arrayOfParticipants=>{
+            list.innerHTML="";
+            arrayOfParticipants.forEach(id=>{
             list.innerHTML+=`<div class="flex"><div id="profile_holder"> <div id="profile">${id.substring(0, 2)}</div> ${id}</div> <button id="chatter">Chat</button></div>`;
+            console.log("listed participants");
+            })
          })
         const myVideo= document.createElement("video");
         let video_grid= document.querySelector(".grid");
@@ -411,11 +523,11 @@
             video_grid.srcObject = null;
         })
         })
-
-        navigator.mediaDevices.getUserMedia({
+         video_append = async ()=>{
+            stream =  await navigator.mediaDevices.getUserMedia({
             video:true,
             audio:true
-        }).then(stream=>{
+        })
             appendVideo(myVideo, stream);
             peer.on('call', call=>{
                 call.answer(stream);
@@ -424,7 +536,6 @@
                     appendVideo(videoelement, streamVideo);
                 })
             })
-
             socket.on('user-connected', userId=>{
                 console.log(`user connected ${userId}`);
                 setTimeout(()=>{
@@ -440,8 +551,9 @@
                 })
                 }, 1000);
             })
-        }) 
-
+         }
+         video_append();
+        
         socket.on('user-disconnected', id=>{
             console.log(id);
             if(peers[id]){
@@ -463,11 +575,15 @@
             socket.emit("participants", id);
         })
         function appendVideo(video, streamVideo){
+            console.log("count");
             video.srcObject=streamVideo;
             video.addEventListener('loadedmetadata', ()=>{
                 video.play();
             })
+            if(video){
+            div= document.createElement("div");
             video_grid.append(video);
+            }
             c=0;
             document.querySelectorAll("video").forEach((element)=>{
                 c++;
