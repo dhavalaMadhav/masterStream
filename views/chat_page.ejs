@@ -314,10 +314,10 @@
         const socket= io();
         const ROOM_ID = "<%= roomId %>"
         var c=0;
-        var peer= new Peer(undefined, {
-            host:'/',
-            port:"3001"
- 
+         var peer= new Peer(undefined, {
+            host:'masterstream.onrender.com',
+            path: '/peerjs',
+            secure: true
         });
         const holder= document.querySelector(".holder");
         const participants = document.querySelector(".participants");
