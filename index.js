@@ -28,7 +28,6 @@ const rooms = {};
 // app.use(express.static("C:/Users/SRUTHI/OneDrive/Desktop/server-3/app.html"));
 io.on("connection", (socket)=>{
     socket.on('join-room', (roomId, userId) =>{
-        socket.broadcast.emit("notify", userId)
         if (!rooms[roomId]) {
       rooms[roomId] = new Set();
     }

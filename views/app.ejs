@@ -298,6 +298,17 @@
         .emojis button:hover{
             background-color: rgba(255, 255, 255, 0.256);
         }
+        .notify{
+            position:absolute;
+            width:fit-content;
+            height:fit-content;
+            top:10px;
+            background-color: white;
+            box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.321);
+            display: none;
+            text-align: center;
+            font-size: 15px;
+        }
         @keyframes move {
             0%{
                 opacity: 0;
@@ -325,7 +336,9 @@
     <script  src="/socket.io/socket.io.js"></script>
     </head>
 <body>
-    <header></header>
+    <header>
+        <div class="notify"></div>
+    </header>
     <div class="container">
         <div class="grid">
         </div>
@@ -538,6 +551,13 @@
             })
             socket.on('user-connected', userId=>{
                 console.log(`user connected ${userId}`);
+
+                //notifying
+                document.querySelector(".notify").innerText=`✅${userId} joined the room`;
+                document.querySelector(".notify").style.display="block";
+                setTimeout(()=>{
+                    document.querySelector(".notify").style.display="none";
+                }, 3000);
                 setTimeout(()=>{
                 const call= peer.call(userId, stream);
                 peers[userId]=call;
@@ -555,7 +575,11 @@
          video_append();
         
         socket.on('user-disconnected', id=>{
-            console.log(id);
+            document.querySelector(".notify").innerText=`❌${id} left the room`;
+                document.querySelector(".notify").style.display="block";
+                setTimeout(()=>{
+                    document.querySelector(".notify").style.display="none";
+                }, 3000);
             if(peers[id]){
                 peers[id].close();
             }
