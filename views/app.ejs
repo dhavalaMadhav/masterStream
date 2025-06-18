@@ -15,8 +15,6 @@
             width:99vw;
             background-color: #3a4380;
             z-index: 10;
-            position: absolute;
-            top:90.3vh;
             display:flex;
             justify-content: space-evenly;
             align-items: center;
@@ -31,6 +29,9 @@
         }
         .container{
             display:flex;
+            height:90vh;
+            justify-content: end;
+            width:99vw;
         }
         video{
             margin:10px;
@@ -39,7 +40,7 @@
             border:10px double #3a4380;
             aspect-ratio: 16/9;
             object-fit: cover;
-            width:1200px;
+            width:70%;
         }
         .grid{
             display:flex;
@@ -48,8 +49,9 @@
             flex-wrap: wrap;
             width:100%;
             overflow:auto;
-            height:98vh;
+            height:100%;
             background-color: white;
+            box-shadow: 20px 20px 100px  rgba(0, 0, 0, 0.321) inset;
         }
         .grid > div{
             border:2px solid red;
@@ -93,7 +95,7 @@
             width:30%;
             display: flex;
             flex-direction: column;
-            height:98vh;
+            height:100%;
             overflow: hidden;
             display:none;
             background-color: #3a4380;
@@ -134,7 +136,7 @@
             box-shadow: 0px 0px 5px rgb(218, 247, 166 );
         }
         .section_2{
-            width:450px;
+            width:400px;
         }
         .section_1, .section_2, .section_3{
             display: flex;
@@ -216,7 +218,7 @@
             box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.321);
             overflow-y: auto;
             overflow-x: hidden;
-            min-width: 350px;
+            /* min-width: 350px; */
         }
         .participants .title button{
             height:30px;
@@ -309,6 +311,9 @@
             text-align: center;
             font-size: 15px;
         }
+        .more{
+            display:none;
+        }
         @keyframes move {
             0%{
                 opacity: 0;
@@ -329,6 +334,32 @@
                 stroke-dashoffset: 0;
                 fill:#6874c0
             }
+        }
+        @media only screen and (max-width:740px){
+            .section_1, .security, .section_3{
+                display:none;
+            }
+            .participants{
+                width:80vw;
+                height:60vh;
+                left:10vw;
+                top:20vh;
+            }
+            #profile{
+            width:20px;
+            height:20px;
+            font-size: 12px;
+        }
+        .title{
+            font-size: 15px;
+        }        
+        #chatter{
+            font-size: 10px;
+        }
+        .more{
+            display:block;
+        }
+
         }
     </style>
     <script  src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
@@ -384,8 +415,8 @@
             <button class="btnPart" onclick="openPart()">participants</button>
             <button class="chat" onclick="openChat()">Chat</button>
             <button class="reactions" onclick="openReactions()">reactions</button>
-            <button>security</button>
-            <button>more</button>
+            <button class="security">security</button>
+            <button class="more">more</button>
         </div>
         <div class="section_3">
             <button class="endSession">End</button>
@@ -397,7 +428,6 @@
             <button onclick="closePart()" class="closePart">x</button>
         </div>
         <div class="list">
-
         </div>
     </div>
     <div class="emojis">
@@ -413,18 +443,19 @@
         var c=0;
         var peer= new Peer(undefined, {
             host:'masterstream.onrender.com',
-            path: '/peerjs',
-            secure: true
+            port: "3001",
+            // path: '/peerjs',
+            // secure: true
         });
         footer = document.querySelector("footer");
-        document.addEventListener('mousemove', ()=>{
-            footer.style.top="90.3vh"
-            footer.style.display="flex";
-            document.addEventListener("click", ()=>{
-            footer.style.top="100vh"
-                footer.style.display="none";
-        })
-        })
+        // document.addEventListener('mousemove', ()=>{
+        //     footer.style.top="90.3vh"
+        //     footer.style.display="flex";
+        //     document.addEventListener("click", ()=>{
+        //     footer.style.top="100vh"
+        //         footer.style.display="none";
+        // })
+        // })
 
         const holder= document.querySelector(".holder");
         const participants = document.querySelector(".participants");
