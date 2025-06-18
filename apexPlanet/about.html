@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Me | Madhav Dhavala</title>
+  <!-- Keep all styles and animated background from your main page here -->
+  <style>
+    :root {
+      --royal-blue: #4169E1;
+      --deep-blue: #27408B;
+      --accent-color: #ff9800;
+      --header-bg: rgba(65, 105, 225, 0.18);
+      --header-blur: blur(14px);
+      --text-white: #fff;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      height: 100%;
+      width: 100vw;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, var(--royal-blue) 0%, var(--deep-blue) 100%);
+      color: var(--text-white);
+      overflow-x: hidden;
+    }
+    /* Animated background elements */
+    .bg-anim {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .bg-shape {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.13);
+      filter: blur(2px);
+      animation: float 9s ease-in-out infinite alternate;
+      box-shadow: 0 0 60px 30px rgba(255,255,255,0.08);
+    }
+    .bg-shape1 {
+      width: 180px; height: 180px;
+      left: 8vw; top: 18vh;
+      animation-delay: 0s;
+      animation-duration: 12s;
+    }
+    .bg-shape2 {
+      width: 120px; height: 120px;
+      right: 12vw; top: 8vh;
+      animation-delay: 2s;
+      animation-duration: 10s;
+    }
+    .bg-shape3 {
+      width: 90px; height: 90px;
+      left: 18vw; bottom: 12vh;
+      animation-delay: 4s;
+      animation-duration: 14s;
+    }
+    .bg-shape4 {
+      width: 60px; height: 60px;
+      right: 18vw; bottom: 10vh;
+      animation-delay: 1s;
+      animation-duration: 11s;
+    }
+    .bg-shape5 {
+      width: 100px; height: 100px;
+      left: 45vw; top: 45vh;
+      animation-delay: 3s;
+      animation-duration: 13s;
+    }
+    @keyframes float {
+      0%   { transform: translateY(0) scale(1);}
+      50%  { transform: translateY(-30px) scale(1.08);}
+      100% { transform: translateY(40px) scale(0.95);}
+    }
+    /* Fixed header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 64px;
+      background: var(--header-bg);
+      backdrop-filter: var(--header-blur);
+      box-shadow: 0 2px 12px rgba(34, 40, 58, 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .nav-container {
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+    }
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--royal-blue);
+      background: #fff;
+      padding: 0.4rem 1.2rem;
+      border-radius: 18px;
+      letter-spacing: 0.08em;
+      box-shadow: 0 2px 8px rgba(65,105,225,0.10);
+      margin-right: 1.5rem;
+      user-select: none;
+    }
+    nav {
+      display: flex;
+      gap: 2.2rem;
+    }
+    nav a {
+      color: var(--text-white);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.08rem;
+      padding: 0.45rem 1.1rem;
+      border-radius: 18px;
+      transition: background-color 0.2s, color 0.2s;
+      letter-spacing: 0.04em;
+      user-select: none;
+    }
+    nav a.active,
+    nav a:hover {
+      background-color: var(--royal-blue);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(65, 105, 225, 0.25);
+    }
+    /* Main container */
+    .main-container {
+      height: 100vh;
+      width: 100vw;
+      padding-top: 64px; /* header height */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4rem;
+      padding-left: 5vw;
+      padding-right: 5vw;
+      box-sizing: border-box;
+      position: relative;
+      z-index: 1;
+    }
+    .left {
+      flex: 0 0 280px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .profile-img {
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 8px solid #fff;
+      box-shadow: 0 12px 36px var(--royal-blue), 0 0 60px rgba(65, 105, 225, 0.26);
+      background: #fff;
+      transition: transform 0.3s;
+    }
+    .profile-img:hover {
+      transform: scale(1.04) rotate(-3deg);
+    }
+    .right {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: var(--text-white);
+      max-width: 600px;
+    }
+    .big-name {
+      font-size: 3.6rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.3rem;
+      color: rgba(255,255,255,0.84);
+      text-shadow: 0 4px 20px rgba(65, 105, 225, 0.5);
+      transition: color 0.3s;
+    }
+    .description {
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.68);
+      margin-bottom: 1.7rem;
+      letter-spacing: 0.02em;
+      max-width: 90%;
+      line-height: 1.5;
+      text-shadow: 0 2px 8px rgba(65, 105, 225, 0.18);
+    }
+    .domain {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #e3eafe;
+      margin-bottom: 2rem;
+      letter-spacing: 0.1em;
+      text-shadow: 0 2px 8px rgba(65, 105, 225, 0.5);
+    }
+    .resume-btn {
+      background-color: var(--royal-blue);
+      color: #fff;
+      font-size: 1.15rem;
+      font-weight: 700;
+      padding: 0.75rem 2.5rem;
+      border-radius: 28px;
+      border: none;
+      cursor: pointer;
+      width: fit-content;
+      box-shadow: 0 6px 18px rgba(65, 105, 225, 0.4);
+      transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+      text-decoration: none;
+      user-select: none;
+      border: 2px solid #fff;
+    }
+    .resume-btn:hover {
+      background-color: var(--accent-color);
+      color: var(--royal-blue);
+      box-shadow: 0 8px 24px rgba(255, 152, 0, 0.5);
+      border: 2px solid var(--royal-blue);
+    }
+    /* Responsive */
+    @media (max-width: 900px) {
+      .main-container {
+        flex-direction: column;
+        gap: 2.5rem;
+        padding-left: 3vw;
+        padding-right: 3vw;
+        text-align: center;
+      }
+      .left {
+        flex: none;
+      }
+      .profile-img {
+        width: 150px;
+        height: 150px;
+      }
+      .right {
+        max-width: 100%;
+      }
+      .big-name {
+        font-size: 2.4rem;
+      }
+      .domain {
+        font-size: 1.1rem;
+        margin-bottom: 1.3rem;
+      }
+      .nav-container {
+        padding: 0 1rem;
+      }
+      nav {
+        gap: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated background shapes -->
+  <div class="bg-anim">
+    <div class="bg-shape bg-shape1"></div>
+    <div class="bg-shape bg-shape2"></div>
+    <div class="bg-shape bg-shape3"></div>
+    <div class="bg-shape bg-shape4"></div>
+    <div class="bg-shape bg-shape5"></div>
+  </div>
+  <header>
+    <div class="nav-container">
+      <div class="logo">MD</div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About Me</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main class="main-container">
+    <div class="left">
+      <img
+        src="myPic.jpg"
+        alt="Madhav Dhavala"
+        class="profile-img"
+      />
+    </div>
+    <div class="right">
+      <h1 class="big-name">About Me</h1>
+      <div class="description">
+        I'm <b>Madhav Dhavala</b>, a web developer passionate about building real-time apps and browser-based tools.<br><br>
+        <b>Skills:</b>
+        <ul style="margin: 1rem 0 0 1.2rem; color:rgba(255,255,255,0.78); font-size:1.08rem; line-height:1.7;">
+          <li>HTML, CSS, JavaScript (ES6+), Responsive Design</li>
+          <li>Real-time apps with Socket.io & PeerJS</li>
+          <li>Node.js, Express.js, MongoDB</li>
+          <li>RESTful API integration</li>
+          <li>Chrome Extension Development (chrome.storage.sync)</li>
+          <li>Web Storage APIs: Local Storage & Session Storage</li>
+          <li>Git, GitHub, Basic Deployment (Render, Railway)</li>
+          <li>DOM Manipulation, Form Validation, EJS Templating</li>
+        </ul>
+        <br>
+        <b>Education:</b> B.Tech, 2nd Year, Computer Science
+      </div>
+      <h2 class="domain">Web Development</h2>
+    </div>
+  </main>
+</body>
+</html>
