@@ -1,472 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: #333;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .upload-header {
-            text-align: center;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-        }
-
-        .upload-header h1 {
-            color: #667eea;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        .provider-info {
-            background: #e3f2fd;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 15px;
-        }
-
-        .upload-area {
-            border: 3px dashed #667eea;
-            border-radius: 15px;
-            padding: 60px 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            background: white;
-            margin-bottom: 30px;
-        }
-
-        .upload-area:hover, .upload-area.drag-over {
-            border-color: #764ba2;
-            background: #f8f9fa;
-        }
-
-        .upload-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-        }
-
-        .upload-info {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-        }
-
-        .upload-progress {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            display: none;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 20px;
-            background: #e0e0e0;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 10px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(135deg, #28a745, #20c997);
-            width: 0%;
-            transition: width 0.3s;
-        }
-
-        .uploaded-files {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-        }
-
-        .file-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            background: #f8f9fa;
-            margin: 10px 0;
-            border-radius: 8px;
-            transition: background-color 0.3s;
-        }
-
-        .file-item:hover {
-            background: #e9ecef;
-        }
-
-        .file-info {
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-        }
-
-        .file-name {
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
-        .file-details {
-            font-size: 14px;
-            color: #666;
-        }
-
-        .file-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn-small {
-            padding: 5px 10px;
-            font-size: 12px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-
-        .btn-delete {
-            background: #dc3545;
-            color: white;
-        }
-
-        .btn-delete:hover {
-            background: #c82333;
-        }
-
-        .success-indicator {
-            color: #28a745;
-            font-weight: bold;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-align: center;
-        }
-
-        .btn-secondary {
-            background: #6c757d;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: #5a6268;
-        }
-
-        .navigation {
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .upload-stats {
-            display: flex;
-            justify-content: space-around;
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #667eea;
-        }
-
-        .no-files {
-            text-align: center;
-            padding: 40px;
-            color: #666;
-        }
-
-        @media (max-width: 768px) {
-            .upload-header h1 {
-                font-size: 2rem;
-            }
-            
-            .upload-area {
-                padding: 40px 15px;
-            }
-            
-            .file-item {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .file-actions {
-                margin-top: 10px;
-                align-self: flex-end;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <style>
+    /* --- styles (unchanged) --- */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+      min-height: 100vh; color:#333; padding:20px;
+    }
+    .container { max-width:1000px; margin:0 auto; }
+    .upload-header {
+      text-align:center; background:white; padding:30px;
+      border-radius:15px; margin-bottom:30px;
+      box-shadow:0 8px 32px rgba(0,0,0,0.1);
+    }
+    .upload-header h1 { color:#667eea; font-size:2.5rem; margin-bottom:10px; }
+    .provider-info { background:#e3f2fd; padding:15px; border-radius:10px; margin-top:15px; }
+    .upload-area {
+      border:3px dashed #667eea; border-radius:15px; padding:60px 20px;
+      text-align:center; cursor:pointer; transition:all .3s; background:white;
+      margin-bottom:30px;
+    }
+    .upload-area:hover,.upload-area.drag-over{ border-color:#764ba2; background:#f8f9fa; }
+    .upload-icon { font-size:4rem; margin-bottom:20px; }
+    .upload-info,.upload-progress,.uploaded-files {
+      background:white; padding:20px; border-radius:15px; margin-bottom:20px;
+    }
+    .upload-progress{ display:none; }
+    .progress-bar{ width:100%; height:20px; background:#e0e0e0; border-radius:10px; overflow:hidden; margin-bottom:10px; }
+    .progress-fill{ height:100%; background:linear-gradient(135deg,#28a745,#20c997); width:0%; transition:width .3s; }
+    .file-item{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:15px; background:#f8f9fa; margin:10px 0; border-radius:8px; transition:.3s;
+    }
+    .file-item:hover{ background:#e9ecef; }
+    .file-info{ flex:1; display:flex; flex-direction:column; }
+    .file-name{ font-weight:bold; margin-bottom:5px; }
+    .file-details{ font-size:14px; color:#666; }
+    .file-actions{ display:flex; gap:10px; }
+    .btn-small{ padding:5px 10px; font-size:12px; border-radius:5px; font-weight:bold; cursor:pointer; transition:.3s; }
+    .btn-delete{ background:#dc3545; color:white; border:none; }
+    .btn-delete:hover{ background:#c82333; }
+    .success-indicator{ color:#28a745; font-weight:bold; }
+    .btn{ padding:12px 24px; border:none; border-radius:8px; font-weight:bold; font-size:16px; cursor:pointer; text-decoration:none; transition:.3s; }
+    .btn-secondary{ background:#6c757d; color:white; }
+    .btn-secondary:hover{ background:#5a6268; }
+    .navigation{ text-align:center; margin-top:30px; }
+    .upload-stats{ display:flex; justify-content:space-around; background:white; padding:15px; border-radius:10px; margin-bottom:20px; }
+    .stat{ text-align:center; }
+    .stat-number{ font-size:1.5rem; font-weight:bold; color:#667eea; }
+    .no-files{ text-align:center; padding:40px; color:#666; }
+    @media(max-width:768px){
+      .upload-header h1{ font-size:2rem; }
+      .upload-area{ padding:40px 15px; }
+      .file-item{ flex-direction:column; align-items:flex-start; }
+      .file-actions{ margin-top:10px; align-self:flex-end; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <header class="upload-header">
-            <h1>📤 <%= title %></h1>
-            <div class="provider-info">
-                <p><strong>Storage Provider:</strong> <%= provider.name %></p>
-                <p><strong>Available Space:</strong> <%= provider.space %>GB | 
-                <strong>Price:</strong> $<%= provider.price %>/GB | 
-                <strong>Total Value:</strong> $<%= (provider.space * provider.price).toFixed(2) %></p>
-            </div>
-        </header>
+  <div class="container">
+    <header class="upload-header">
+      <h1>📤 <%= title %></h1>
+      <div class="provider-info">
+        <p><strong>Storage Provider:</strong> <%= provider?.name || "N/A" %></p>
+        <p><strong>Available Space:</strong> <%= provider?.space || 0 %>GB | 
+           <strong>Price:</strong> $<%= provider?.price || 0 %>/GB | 
+           <strong>Total Value:</strong> $<%= ((provider?.space||0)*(provider?.price||0)).toFixed(2) %></p>
+      </div>
+    </header>
 
-        <div class="upload-stats">
-            <div class="stat">
-                <div class="stat-number"><%= uploadedFiles.length %></div>
-                <div>Files Uploaded</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number">
-                    <%= uploadedFiles.reduce((total, file) => total + file.size, 0) > 0 ? 
-                        (uploadedFiles.reduce((total, file) => total + file.size, 0) / (1024 * 1024)).toFixed(2) + 'MB' : '0MB' %>
-                </div>
-                <div>Total Size</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number"><%= provider.space %>GB</div>
-                <div>Available Space</div>
-            </div>
+    <div class="upload-stats">
+      <div class="stat">
+        <div class="stat-number"><%= uploadedFiles?.length || 0 %></div>
+        <div>Files Uploaded</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">
+          <% 
+            let totalSize = uploadedFiles?.reduce((t,f)=>t+f.size,0) || 0; 
+            let displaySize = totalSize>0 ? (totalSize/(1024*1024)).toFixed(2)+'MB' : '0MB'; 
+          %>
+          <%= displaySize %>
         </div>
-
-        <div class="upload-content">
-            <div class="upload-section">
-                <div class="upload-area" id="uploadArea">
-                    <div class="upload-icon">📁</div>
-                    <h3>Drag & Drop Files Here</h3>
-                    <p>or click to browse files</p>
-                    <input type="file" id="fileInput" multiple hidden>
-                </div>
-                
-                <div class="upload-info">
-                    <p><strong>Supported:</strong> All file types</p>
-                    <p><strong>Max Size:</strong> 100MB per file</p>
-                    <p><strong>Storage:</strong> Files are stored on your local computer</p>
-                    <p><strong>Security:</strong> Files are processed securely and stored locally</p>
-                </div>
-            </div>
-
-            <div class="upload-progress" id="uploadProgress">
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill"></div>
-                </div>
-                <p id="progressText">Uploading...</p>
-            </div>
-
-            <div class="uploaded-files" id="uploadedFiles">
-                <h3>Uploaded Files to <%= provider.name %></h3>
-                <div id="filesList">
-                    <% if (uploadedFiles.length === 0) { %>
-                        <div class="no-files">
-                            <p>No files uploaded yet</p>
-                            <p>Use the upload area above to start uploading files</p>
-                        </div>
-                    <% } else { %>
-                        <% uploadedFiles.forEach(function(file) { %>
-                            <div class="file-item" data-file-id="<%= file.id %>">
-                                <div class="file-info">
-                                    <div class="file-name"><%= file.originalName %></div>
-                                    <div class="file-details">
-                                        Size: <%= (file.size / (1024 * 1024)).toFixed(2) %>MB | 
-                                        Type: <%= file.mimetype %> | 
-                                        Uploaded: <%= file.uploadDate %>
-                                    </div>
-                                </div>
-                                <div class="file-actions">
-                                    <div class="success-indicator">✅ Stored</div>
-                                    <button onclick="deleteFile(<%= file.id %>)" class="btn-small btn-delete">
-                                        Delete
-                                    </button>
-                                </div>
-                            </div>
-                        <% }); %>
-                    <% } %>
-                </div>
-            </div>
-        </div>
-        
-        <div class="navigation">
-            <a href="/marketplace" class="btn btn-secondary">← Back to Marketplace</a>
-        </div>
+        <div>Total Size</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number"><%= provider?.space || 0 %>GB</div>
+        <div>Available Space</div>
+      </div>
     </div>
 
-    <script>
-        // File upload functionality
-        const uploadArea = document.getElementById('uploadArea');
-        const fileInput = document.getElementById('fileInput');
-        const uploadProgress = document.getElementById('uploadProgress');
-        const progressFill = document.getElementById('progressFill');
-        const progressText = document.getElementById('progressText');
-        const filesList = document.getElementById('filesList');
+    <div class="upload-content">
+      <div class="upload-section">
+        <div class="upload-area" id="uploadArea">
+          <div class="upload-icon">📁</div>
+          <h3>Drag & Drop Files Here</h3>
+          <p>or click to browse files</p>
+          <input type="file" id="fileInput" multiple hidden>
+        </div>
+        <div class="upload-info">
+          <p><strong>Supported:</strong> All file types</p>
+          <p><strong>Max Size:</strong> 100MB per file</p>
+          <p><strong>Storage:</strong> Files are stored on your local computer</p>
+          <p><strong>Security:</strong> Files are processed securely and stored locally</p>
+        </div>
+      </div>
 
-        // Click to upload
-        uploadArea.addEventListener('click', () => {
-            fileInput.click();
-        });
+      <div class="upload-progress" id="uploadProgress">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <p id="progressText">Uploading...</p>
+      </div>
 
-        // Drag and drop functionality
-        uploadArea.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadArea.classList.add('drag-over');
-        });
+      <div class="uploaded-files" id="uploadedFiles">
+        <h3>Uploaded Files to <%= provider?.name || "Provider" %></h3>
+        <div id="filesList">
+          <% if (!uploadedFiles || uploadedFiles.length === 0) { %>
+            <div class="no-files">
+              <p>No files uploaded yet</p>
+              <p>Use the upload area above to start uploading files</p>
+            </div>
+          <% } else { %>
+            <% uploadedFiles.forEach(function(file){ %>
+              <div class="file-item" data-file-id="<%= file.id %>">
+                <div class="file-info">
+                  <div class="file-name"><%= file.originalName %></div>
+                  <div class="file-details">
+                    Size: <%= (file.size/(1024*1024)).toFixed(2) %>MB | 
+                    Type: <%= file.mimetype %> | 
+                    Uploaded: <%= file.uploadDate %>
+                  </div>
+                </div>
+                <div class="file-actions">
+                  <div class="success-indicator">✅ Stored</div>
+                  <button type="button" onclick="deleteFile('<%= file.id %>')" class="btn-small btn-delete">Delete</button>
+                </div>
+              </div>
+            <% }); %>
+          <% } %>
+        </div>
+      </div>
+    </div>
 
-        uploadArea.addEventListener('dragleave', (e) => {
-            e.preventDefault();
-            uploadArea.classList.remove('drag-over');
-        });
+    <div class="navigation">
+      <a href="/marketplace" class="btn btn-secondary">← Back to Marketplace</a>
+    </div>
+  </div>
 
-        uploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadArea.classList.remove('drag-over');
-            
-            const files = e.dataTransfer.files;
-            handleFiles(files);
-        });
+  <script>
+    const uploadArea=document.getElementById('uploadArea');
+    const fileInput=document.getElementById('fileInput');
+    const uploadProgress=document.getElementById('uploadProgress');
+    const progressFill=document.getElementById('progressFill');
+    const progressText=document.getElementById('progressText');
+    const filesList=document.getElementById('filesList');
 
-        // File input change
-        fileInput.addEventListener('change', (e) => {
-            const files = e.target.files;
-            handleFiles(files);
-        });
+    uploadArea.addEventListener('click',()=>fileInput.click());
+    uploadArea.addEventListener('dragover',e=>{e.preventDefault();uploadArea.classList.add('drag-over');});
+    uploadArea.addEventListener('dragleave',e=>{e.preventDefault();uploadArea.classList.remove('drag-over');});
+    uploadArea.addEventListener('drop',e=>{
+      e.preventDefault();uploadArea.classList.remove('drag-over');
+      handleFiles(e.dataTransfer.files);
+    });
+    fileInput.addEventListener('change',e=>handleFiles(e.target.files));
 
-        function handleFiles(files) {
-            for (let file of files) {
-                if (file.size > 100 * 1024 * 1024) { // 100MB limit
-                    alert(`File ${file.name} is too large. Maximum size is 100MB.`);
-                    continue;
-                }
-                uploadFile(file);
-            }
-        }
-
-        function uploadFile(file) {
-            const formData = new FormData();
-            formData.append('file', file);
-
-            // Show progress
-            uploadProgress.style.display = 'block';
-            progressFill.style.width = '0%';
-            progressText.textContent = `Uploading ${file.name}...`;
-
-            // Simulate progress
-            let progress = 0;
-            const progressInterval = setInterval(() => {
-                progress += Math.random() * 15 + 5;
-                if (progress > 90) progress = 90;
-                progressFill.style.width = progress + '%';
-            }, 100);
-
-            // Upload file
-            fetch(`/upload/<%= provider.id %>`, {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                clearInterval(progressInterval);
-                progressFill.style.width = '100%';
-                progressText.textContent = data.success ? 'Upload complete!' : 'Upload failed!';
-
-                if (data.success) {
-                    setTimeout(() => {
-                        uploadProgress.style.display = 'none';
-                        // Reload page to show updated file list
-                        window.location.reload();
-                    }, 1500);
-                } else {
-                    alert('Upload failed: ' + data.message);
-                    setTimeout(() => {
-                        uploadProgress.style.display = 'none';
-                    }, 3000);
-                }
-            })
-            .catch(error => {
-                clearInterval(progressInterval);
-                progressText.textContent = 'Upload error!';
-                console.error('Error:', error);
-                alert('Upload error: ' + error.message);
-                setTimeout(() => {
-                    uploadProgress.style.display = 'none';
-                }, 3000);
-            });
-        }
-
-        function deleteFile(fileId) {
-            if (!confirm('Are you sure you want to delete this file?')) {
-                return;
-            }
-
-            fetch(`/api/files/${fileId}`, {
-                method: 'DELETE'
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Remove file item from display
-                    const fileItem = document.querySelector(`[data-file-id="${fileId}"]`);
-                    if (fileItem) {
-                        fileItem.remove();
-                    }
-                    
-                    // Check if no files left
-                    const remainingFiles = document.querySelectorAll('.file-item');
-                    if (remainingFiles.length === 0) {
-                        filesList.innerHTML = `
-                            <div class="no-files">
-                                <p>No files uploaded yet</p>
-                                <p>Use the upload area above to start uploading files</p>
-                            </div>
-                        `;
-                    }
-                    
-                    alert('File deleted successfully!');
-                } else {
-                    alert('Failed to delete file: ' + data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Error deleting file: ' + error.message);
-            });
-        }
-    </script>
+    function handleFiles(files){
+      for(let file of files){
+        if(file.size>100*1024*1024){alert(`File ${file.name} is too large.`);continue;}
+        uploadFile(file);
+      }
+    }
+    function uploadFile(file){
+      const formData=new FormData(); formData.append('file',file);
+      uploadProgress.style.display='block'; progressFill.style.width='0%'; progressText.textContent=`Uploading ${file.name}...`;
+      let progress=0; const interval=setInterval(()=>{progress+=Math.random()*15+5;if(progress>90)progress=90;progressFill.style.width=progress+'%';},100);
+      fetch(`/upload/<%= provider?.id || "" %>`,{method:'POST',body:formData})
+      .then(res=>res.json())
+      .then(data=>{
+        clearInterval(interval);
+        progressFill.style.width='100%';
+        progressText.textContent=data.success?'Upload complete!':'Upload failed!';
+        if(data.success){setTimeout(()=>window.location.reload(),1500);}
+        else{alert('Upload failed: '+data.message);}
+      })
+      .catch(err=>{
+        clearInterval(interval);
+        progressText.textContent='Upload error!';
+        console.error(err);
+        alert('Upload error: '+err.message);
+      });
+    }
+    function deleteFile(fileId){
+      if(!confirm('Delete this file?'))return;
+      fetch(`/api/files/${fileId}`,{method:'DELETE'})
+      .then(res=>res.json())
+      .then(data=>{
+        if(data.success){
+          const item=document.querySelector(`[data-file-id="${fileId}"]`);
+          if(item)item.remove();
+          if(document.querySelectorAll('.file-item').length===0){
+            filesList.innerHTML=`<div class="no-files"><p>No files uploaded yet</p><p>Use the upload area above to start uploading files</p></div>`;
+          }
+          alert('File deleted!');
+        }else{alert('Failed: '+data.message);}
+      })
+      .catch(err=>alert('Error deleting file: '+err.message));
+    }
+  </script>
 </body>
 </html>
