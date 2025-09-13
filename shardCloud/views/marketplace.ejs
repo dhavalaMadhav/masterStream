@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .marketplace-header {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .marketplace-header h1 {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .storage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .storage-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .storage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .provider-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .feature {
+            background: #f8f9fa;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .no-storage {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            color: #666;
+        }
+
+        .admin-link {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="marketplace-header">
+            <h1>☁️ <%= title %></h1>
+            <p>Find affordable storage from trusted providers</p>
+        </header>
+
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-number"><%= providers.length %></div>
+                <div>Providers Available</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">
+                    <%= providers.reduce((total, provider) => total + provider.space, 0) %>GB
+                </div>
+                <div>Total Storage</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">
+                    $<%= providers.length > 0 ? (providers.reduce((total, provider) => total + provider.price, 0) / providers.length).toFixed(2) : '0.00' %>
+                </div>
+                <div>Average Price/GB</div>
+            </div>
+        </div>
+
+        <div class="marketplace-content">
+            <% if (providers.length === 0) { %>
+                <div class="no-storage">
+                    <h2>🚫 No storage providers available</h2>
+                    <p>Check back later for available storage options</p>
+                    <p style="margin-top: 20px;">
+                        <a href="/admin" class="btn btn-primary" style="width: auto; padding: 15px 30px;">
+                            Add First Provider
+                        </a>
+                    </p>
+                </div>
+            <% } else { %>
+                <div class="storage-grid">
+                    <% providers.forEach(function(provider) { %>
+                        <div class="storage-card">
+                            <div class="card-header">
+                                <h3><%= provider.name %></h3>
+                                <span class="price">$<%= provider.price %>/GB</span>
+                            </div>
+                            
+                            <div class="card-body">
+                                <div class="storage-info">
+                                    <p><strong>Available Space:</strong> <%= provider.space %>GB</p>
+                                    <p><strong>Description:</strong> <%= provider.description %></p>
+                                    <p><strong>Total Cost:</strong> $<%= (provider.space * provider.price).toFixed(2) %></p>
+                                </div>
+                                
+                                <div class="provider-features">
+                                    <span class="feature">✅ Secure Storage</span>
+                                    <span class="feature">🔒 Encrypted</span>
+                                    <span class="feature">⚡ Fast Upload</span>
+                                    <span class="feature">💾 Local Storage</span>
+                                </div>
+                            </div>
+                            
+                            <div class="card-footer">
+                                <a href="/payment/<%= provider.id %>" class="btn btn-primary">
+                                    Choose Provider
+                                </a>
+                            </div>
+                        </div>
+                    <% }); %>
+                </div>
+            <% } %>
+        </div>
+        
+        <div class="admin-link">
+            <a href="/admin" class="btn btn-secondary">Admin Panel</a>
+        </div>
+    </div>
+</body>
+</html>
